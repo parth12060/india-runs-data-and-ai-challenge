@@ -1,0 +1,10 @@
+# ── DEFAULT run: NOTHING to install ──────────────────────────────────────────
+# `python rank.py --candidates candidates.jsonl --out submission.csv` uses only the
+# Python standard library (the built-in TF-IDF semantic layer). No packages needed.
+#
+# The line below is ONLY needed if you switch to the optional dense-embedding
+# backend (see requirements-precompute.txt and README "Optional: dense embeddings").
+# It lets rank.py read the precomputed BM25 index; dense-only works with numpy alone.
+#
+# numpy>=1.24          # uncomment only if using --semantic embeddings
+# rank_bm25>=0.2.2     # uncomment only if using --semantic embeddings with a BM25 index

@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+# Precomputed artifacts are large (embeddings ~150-300 MB). Rebuild with precompute.py.
+artifacts/
+# Large data files — not committed; provided by the organizers.
+candidates.jsonl
+candidates.jsonl.gz

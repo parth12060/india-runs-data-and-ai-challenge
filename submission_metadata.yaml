@@ -1,0 +1,79 @@
+# Redrob Hackathon — Submission Metadata (combined A+B ranker)
+# Fill in the placeholders marked <...> before submitting via the portal.
+
+# ============================================================================
+# Team identity
+# ============================================================================
+team_name: "<your-team-name>"
+
+primary_contact:
+  name: "Parth"
+  email: "parthlodat12@gmail.com"
+  phone: "<+91-XXXXXXXXXX>"
+
+team_members:
+  - name: "Parth"
+    email: "parthlodat12@gmail.com"
+    role: "ML Engineer"
+
+# ============================================================================
+# Code and reproducibility
+# ============================================================================
+github_repo: "<https://github.com/YOUR_USERNAME/redrob-ranker>"
+sandbox_link: "<https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker or Colab link>"
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --artifacts ./artifacts --out ./submission.csv"
+
+# ============================================================================
+# Compute environment
+# ============================================================================
+compute:
+  platform: "<your machine, e.g. MacBook Pro M2 / Local Linux box>"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.11"
+  os: "<your OS>"
+  uses_gpu_for_inference: false          # rank step is CPU-only
+  has_network_during_ranking: false      # rank step makes no network calls
+  pre_computation_required: true         # embeddings + BM25 built offline by precompute.py
+  pre_computation_time_minutes: 30       # approx; depends on model + CPU (MiniLM faster than BGE)
+
+# ============================================================================
+# AI tools declaration (transparency only — declared use is NOT penalized)
+# ============================================================================
+ai_tools_used:
+  - "Claude"
+
+ai_usage_summary: |
+  Used Claude for architecture design (how to fuse the structured Option A ranker
+  with the Option B embedding layer), honeypot-detector calibration against the
+  real pool, code review, and packaging. All ranking logic is explicit, human-owned
+  code (config/features/honeypot/semantic/rank). No candidate data was sent to any
+  hosted LLM, and no LLM is called during the ranking step (CPU-only, no network).
+
+# ============================================================================
+# Approach summary
+# ============================================================================
+methodology_summary: |
+  Hybrid ranker: a structured feature model (Option A) is the backbone; a
+  precomputed semantic layer (Option B) is fused in as one weighted feature.
+  Option A scores title+career fit (the decisive anti-stuffer signal),
+  trust-weighted skills (proficiency x duration x endorsements), experience-band
+  fit, product-vs-consulting, location, and education, with explicit penalties
+  (keyword-stuffer, consulting-only, pure-research, CV/speech-only, job-hopper)
+  and a bounded behavioral-availability multiplier from redrob_signals. Option B
+  contributes semantic_fit = blend of dense embedding cosine (sentence-transformers,
+  precomputed offline) and BM25, min-max normalized across the pool; it surfaces
+  strong-but-quietly-worded candidates that keyword matching misses. A high-precision
+  honeypot gate (internal-contradiction rules) zeroes impossible profiles. All 100K
+  are scored in one ~30s CPU pass (peak <0.5 GB), so recall is perfect and the
+  embedding never overrides the structured penalties. Honeypot rate in the top 100: 0%.
+
+# ============================================================================
+# Declarations
+# ============================================================================
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true

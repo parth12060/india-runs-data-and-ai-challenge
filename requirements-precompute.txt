@@ -1,0 +1,8 @@
+# ── OFFLINE PRECOMPUTE dependencies (run once; network allowed; no time limit) ─
+# Used only by precompute.py to build embeddings + BM25 into ./artifacts.
+# rank.py never imports these.
+sentence-transformers>=2.2.0
+torch>=2.0                # CPU build is fine: pip install torch --index-url https://download.pytorch.org/whl/cpu
+rank_bm25>=0.2.2
+numpy>=1.24
+tqdm>=4.65
