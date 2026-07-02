@@ -4,23 +4,28 @@
 # ============================================================================
 # Team identity
 # ============================================================================
-team_name: "<your-team-name>"
+team_name: "Team Core"
 
 primary_contact:
-  name: "Parth"
-  email: "parthlodat12@gmail.com"
-  phone: "<+91-XXXXXXXXXX>"
+  name: "Prem Dubay"
+  email: "masterprem001@gmail.com"
+  phone: "<+91-9320554333>"
 
 team_members:
-  - name: "Parth"
+  - name: "Prem Dubay"
+    email: "masterprem001@gmail.com"
+    role: "AI Engineer"
+  - name: "Parth lodat"
     email: "parthlodat12@gmail.com"
     role: "ML Engineer"
-
+    - name: "Aditya Dhavale"
+    email: "aditya.s.dhavale@slrtce.in"
+    role: "Data Engineer"
 # ============================================================================
 # Code and reproducibility
 # ============================================================================
 github_repo: "<https://github.com/YOUR_USERNAME/redrob-ranker>"
-sandbox_link: "<https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker or Colab link>"
+sandbox_link: "<https://colab.research.google.com/drive/1QMlnu5ZRr4MlLVxXaeURXR5O52WxhVgN?usp=sharing>"
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --artifacts ./artifacts --out ./submission.csv"
 
 # ============================================================================
